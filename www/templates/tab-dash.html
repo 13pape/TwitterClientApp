@@ -1,0 +1,31 @@
+<ion-view view-title="Twitter Feed">
+  <ion-content class="padding">
+ 
+ 		
+      <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+			 <div class="centerDiv">
+				
+			 <button class="button button-block button-positive" ng-click="logout()">Twitter Logout</button>
+		  </div>
+		  
+			<div ng-show="twitterFeed.length == 0">Loading...</div>
+
+			<div ng-repeat="post in twitterFeed" class="list">
+			  <div class="item item-avatar">
+				<img ng-src="{{post.user.profile_image_url}}"/>
+				<h2>{{post.user.name}} - @{{post.user.screen_name}}</h2>
+				<p>{{formatTime(post.created_at)}} min ago</p>
+			  </div>
+
+			  <div class="item item-body">
+				<p ng-bind-html="post.text"></p>
+				<img ng-if="post.extended_entities" ng-src="{{ post.extended_entities.media[0].media_url }}" style="width: 100%;"/>
+			  </div>
+
+			</div>
+  
+		
+
+  </ion-content>
+</ion-view>
